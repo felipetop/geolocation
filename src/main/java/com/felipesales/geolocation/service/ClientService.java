@@ -9,7 +9,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ValidationException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,8 +50,8 @@ public class ClientService {
         return client.get();
     }
 
-    public Client save(Client client, BindingResult bindingResult) throws NotFoundException, ValidationException {
-
+    public Client save(Client client, BindingResult bindingResult, HttpServletRequest request) throws NotFoundException, ValidationException {
+        client.getGeolocation().setName(request.getRemoteAddr());
         return clientRepository.save(client);
     }
 

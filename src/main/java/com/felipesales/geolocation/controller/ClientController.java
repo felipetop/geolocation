@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 import java.util.List;
@@ -34,8 +35,8 @@ public class ClientController {
     }
 
     @PostMapping
-    public Client save(@RequestBody @Valid Client client, BindingResult bindingResult) throws NotFoundException, ValidationException {
-        return clientService.save(client, bindingResult);
+    public Client save(@RequestBody @Valid Client client, BindingResult bindingResult, HttpServletRequest request) throws NotFoundException, ValidationException {
+        return clientService.save(client, bindingResult, request);
     }
 
     @PutMapping("/{id}")

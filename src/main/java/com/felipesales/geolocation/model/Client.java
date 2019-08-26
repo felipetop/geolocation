@@ -21,6 +21,18 @@ public class Client {
     @Column(name = "age", nullable = false)
     private Integer age;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "geolocation_id", referencedColumnName = "geolocation_id")
+    private Geolocation geolocation;
+
+    public Geolocation getGeolocation() {
+        return geolocation;
+    }
+
+    public void setGeolocation(Geolocation geolocation) {
+        this.geolocation = geolocation;
+    }
+
     public int getId() {
         return id;
     }
