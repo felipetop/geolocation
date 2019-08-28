@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -35,7 +36,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public Client save(@RequestBody @Valid Client client, BindingResult bindingResult, HttpServletRequest request) throws NotFoundException, ValidationException {
+    public Client save(@RequestBody @Valid Client client, BindingResult bindingResult, HttpServletRequest request) throws NotFoundException, ValidationException, IOException {
         return clientService.save(client, bindingResult, request);
     }
 

@@ -13,9 +13,13 @@ public class Geolocation {
     @Column(name = "geolocation_id", nullable = false)
     private int id;
 
-    @NotNull(message = "{maxAndMinTemperatureCanNotBeNull}")
-    @Column(name = "max_and_min_temperature", nullable = false)
-    private String name;
+    @NotNull(message = "{maxTemperatureCanNotBeNull}")
+    @Column(name = "max_temperature", nullable = false)
+    private Float maxTemperature;
+
+    @NotNull(message = "{minTemperatureCanNotBeNull}")
+    @Column(name = "min_temperature", nullable = false)
+    private Float minTemperature;
 
     public int getId() {
         return id;
@@ -24,11 +28,20 @@ public class Geolocation {
     public void setId(int id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+
+    public Float getMaxTemperature() {
+        return maxTemperature;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMaxTemperature(Float maxTemperature) {
+        this.maxTemperature = maxTemperature;
+    }
+
+    public Float getMinTemperature() {
+        return minTemperature;
+    }
+
+    public void setMinTemperature(Float minTemperature) {
+        this.minTemperature = minTemperature;
     }
 }
