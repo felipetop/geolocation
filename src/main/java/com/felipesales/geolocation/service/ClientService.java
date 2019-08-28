@@ -5,6 +5,7 @@ import com.felipesales.geolocation.datatransferobject.metaWeather.ConsolidateWea
 import com.felipesales.geolocation.datatransferobject.metaWeather.Weather;
 import com.felipesales.geolocation.datatransferobject.metaWeather.Woe;
 import com.felipesales.geolocation.model.Client;
+import com.felipesales.geolocation.model.Geolocation;
 import com.felipesales.geolocation.repository.ClientRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,10 @@ public class ClientService {
     }
 
     public Client save(Client client, BindingResult bindingResult, HttpServletRequest request) throws NotFoundException, ValidationException, IOException {
+
+        if (client.getGeolocation() == null) {
+            client.setGeolocation(new Geolocation());
+        }
         Coordinates coordinates = getCoordinatesByIp(request);
         ConsolidateWeather consolidateWeather = getTodayWeather(coordinates);
         client.getGeolocation().setMaxTemperature(consolidateWeather.getMax_temp());
