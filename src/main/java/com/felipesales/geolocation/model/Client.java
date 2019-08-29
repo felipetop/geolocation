@@ -11,7 +11,7 @@ public class Client {
     @SequenceGenerator(name="Client_Generator", sequenceName="client_sequence", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Client_Generator")
     @Column(name = "client_id", nullable = false)
-    private int id;
+    private Integer id;
 
     @NotNull(message = "{nameCanNotBeNull}")
     @Column(name = "name", nullable = false)
@@ -33,11 +33,11 @@ public class Client {
         this.geolocation = geolocation;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

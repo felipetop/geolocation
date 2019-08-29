@@ -7,18 +7,14 @@ import com.felipesales.geolocation.datatransferobject.metaWeather.Woe;
 import com.felipesales.geolocation.model.Client;
 import com.felipesales.geolocation.model.Geolocation;
 import com.felipesales.geolocation.repository.ClientRepository;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.ValidationException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,13 +30,8 @@ public class ClientService {
     @Autowired
     RestTemplate restTemplate;
 
-    public void delete(Integer id) throws NotFoundException {
+    public void delete(Integer id) {
         Optional<Client> client = clientRepository.findById(id);
-
-        if (!client.isPresent()) {
-            throw new NotFoundException(messageSource.getMessage("clientNotFound", null, null));
-        }
-
         clientRepository.delete(client.get());
     }
 
@@ -48,18 +39,14 @@ public class ClientService {
         return clientRepository.findAll(new Sort(Sort.Direction.ASC, "name"));
     }
 
-    public Client findById(Integer id) throws NotFoundException {
+    public Client findById(Integer id) {
 
         Optional<Client> client = clientRepository.findById(id);
-
-        if (!client.isPresent()) {
-            throw new NotFoundException(messageSource.getMessage("clientNotFound", null, null));
-        }
 
         return client.get();
     }
 
-    public Client save(Client client, BindingResult bindingResult, HttpServletRequest request) throws NotFoundException, ValidationException, IOException {
+    public Client save(Client client, HttpServletRequest request) {
 
         if (client.getGeolocation() == null) {
             client.setGeolocation(new Geolocation());
@@ -71,13 +58,9 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-    public Client update(Integer id, Client client, BindingResult bindingResult) throws NotFoundException, ValidationException {
+    public Client update(Integer id, Client client){
 
         Client clientToUpdate = findById(id);
-
-        if (clientToUpdate == null) {
-            throw new NotFoundException(messageSource.getMessage("clientNotFound", null, null));
-        }
 
         clientToUpdate.setName(client.getName());
         clientToUpdate.setAge(client.getAge());
@@ -85,7 +68,7 @@ public class ClientService {
         return clientRepository.save(clientToUpdate);
     }
 
-    private Coordinates getCoordinatesByIp(HttpServletRequest request) throws IOException {
+    private Coordinates getCoordinatesByIp(HttpServletRequest request) {
         //String url = "https://ipvigilante.com/json/"+request.getRemoteAddr()+"";
         String url = "https://ipvigilante.com/json/189.111.88.108";
         Coordinates coordinates = restTemplate.getForObject(url, Coordinates.class);
