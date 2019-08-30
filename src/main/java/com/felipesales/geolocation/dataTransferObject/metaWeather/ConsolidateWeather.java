@@ -1,4 +1,4 @@
-package com.felipesales.geolocation.datatransferobject.metaWeather;
+package com.felipesales.geolocation.dataTransferObject.metaWeather;
 
 public class ConsolidateWeather {
 

@@ -1,14 +1,13 @@
 package com.felipesales.geolocation.service;
 
-import com.felipesales.geolocation.datatransferobject.ipVigilante.Coordinates;
-import com.felipesales.geolocation.datatransferobject.metaWeather.ConsolidateWeather;
-import com.felipesales.geolocation.datatransferobject.metaWeather.Weather;
-import com.felipesales.geolocation.datatransferobject.metaWeather.Woe;
+import com.felipesales.geolocation.dataTransferObject.ipVigilante.Coordinates;
+import com.felipesales.geolocation.dataTransferObject.metaWeather.ConsolidateWeather;
+import com.felipesales.geolocation.dataTransferObject.metaWeather.Weather;
+import com.felipesales.geolocation.dataTransferObject.metaWeather.Woe;
 import com.felipesales.geolocation.model.Client;
 import com.felipesales.geolocation.model.Geolocation;
 import com.felipesales.geolocation.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -23,9 +22,6 @@ public class ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
-
-    @Autowired
-    private MessageSource messageSource;
 
     @Autowired
     RestTemplate restTemplate;
@@ -69,8 +65,7 @@ public class ClientService {
     }
 
     private Coordinates getCoordinatesByIp(HttpServletRequest request) {
-        //String url = "https://ipvigilante.com/json/"+request.getRemoteAddr()+"";
-        String url = "https://ipvigilante.com/json/189.111.88.108";
+        String url = "https://ipvigilante.com/json/"+request.getRemoteAddr()+"";
         Coordinates coordinates = restTemplate.getForObject(url, Coordinates.class);
         return coordinates;
     }
@@ -136,7 +131,6 @@ public class ClientService {
 
     private Woe getWoeNearestLocation(Woe[] woes,Coordinates coordinates) {
         Woe woeNearest = setWoeDistance(woes[0],coordinates);
-        //Double nearestDistance = woes[0].getDistance();
         if (woes.length > 1){
             for (int i = 0; i < woes.length; i++) {
                Woe woe  = setWoeDistance(woes[i],coordinates);
@@ -147,6 +141,4 @@ public class ClientService {
         }
         return woeNearest;
     }
-
-
 }

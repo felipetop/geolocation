@@ -1,4 +1,4 @@
-package com.felipesales.geolocation.datatransferobject.ipVigilante;
+package com.felipesales.geolocation.dataTransferObject.ipVigilante;
 
 public class Data {
 

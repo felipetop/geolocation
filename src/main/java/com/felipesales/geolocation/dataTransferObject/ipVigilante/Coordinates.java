@@ -1,4 +1,4 @@
-package com.felipesales.geolocation.datatransferobject.ipVigilante;
+package com.felipesales.geolocation.dataTransferObject.ipVigilante;
 
 public class Coordinates {
 
@@ -11,5 +11,4 @@ public class Coordinates {
     public void setData(Data data) {
         this.data = data;
     }
-
 }
