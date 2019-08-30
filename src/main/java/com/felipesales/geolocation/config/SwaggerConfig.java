@@ -29,8 +29,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         ApiInfo apiInfo = new ApiInfo(
-                "Geolocation - Geolocalização",
-                "Documentação do serviço rest de <b>Geolocalização</b>.",
+                "Client CRUD with Weather API ",
+                "A CRUD application that attach the <b>weather info</b> with the <b>new user</b> based on the <b>IP</b> of who is registering the new user.",
                 "1.0",
                 null,
                 null,

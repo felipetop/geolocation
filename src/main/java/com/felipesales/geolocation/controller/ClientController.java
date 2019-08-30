@@ -19,31 +19,31 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @ApiOperation(value = "Deleta um Cliente, a partir do identificador do Cliente")
+    @ApiOperation(value = "Deletes a client using client identifier")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Integer id) {
         clientService.delete(id);
     }
 
-    @ApiOperation(value = "Retorna todos os Clientes")
+    @ApiOperation(value = "Returns all Clients")
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Client> findAll() {
         return clientService.findAll();
     }
 
-    @ApiOperation(value = "Retorna o Cliente a partir do indentificador do Cliente")
+    @ApiOperation(value = "Returns Client from Client identifier")
     @GetMapping("/{id}")
     public Client findById(@PathVariable("id") Integer id) {
         return clientService.findById(id);
     }
 
-    @ApiOperation(value = "Cria um novo Cliente")
+    @ApiOperation(value = "Create a new Client")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Client save(@RequestBody @Valid Client client, HttpServletRequest request) {
         return clientService.save(client, request);
     }
 
-    @ApiOperation(value = "Altera um Cliente")
+    @ApiOperation(value = "Update a Client")
     @PutMapping("/{id}")
     public Client update(@PathVariable("id") Integer id, @RequestBody @Valid Client client) {
         return clientService.update(id, client);
